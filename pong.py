@@ -40,6 +40,8 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0,0)
+ball.dx = 0.02
+ball.dy = 0.02
 
 def paddle_a_up():
     y = paddle_a.ycor()
@@ -70,4 +72,13 @@ wn.onkeypress(paddle_b_down, "Down")
 # main game loop
 while True:
     wn.update()
-
+    
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+    
+    if abs(ball.ycor()) > 290:
+        ball.dy *= -1
+        
+    if abs(ball.xcor()) > 390:
+        ball.goto(0,0) #start again
+        ball.dx *= -1
